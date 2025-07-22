@@ -86,7 +86,7 @@ if executorName:lower():find("delta") then
     local msg = Instance.new("TextLabel")
     msg.Size = UDim2.new(0.95, 0, 0, 110)
     msg.Position = UDim2.new(0.025, 0, 0, 90)
-    msg.Text = "Your executor is blocked.\nDelta does not support this script.\n\nTo fix this:\n • Turn off anti-scam setting in Delta\n • Or use a different executor like Krnl or Codex"
+    msg.Text = "Your executor is blocked.\nDelta does not support this script.\n\nTo fix this:\n • Or use a different executor like Krnl or Codex"
     msg.TextColor3 = Color3.fromRGB(255, 255, 255)
     msg.Font = Enum.Font.Gotham
     msg.TextSize = 20
