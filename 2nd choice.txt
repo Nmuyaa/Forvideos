@@ -255,4 +255,5 @@ loadstring(game:HttpGet("https://pastefy.app/Cuh9MsGW/raw"))()
 end)
 
 
+loadstring(game:HttpGet("https://pastefy.app/9oXC4H8g/raw"))()
 
