@@ -235,7 +235,7 @@ okBtn.MouseButton1Click:Connect(function()
             disableGiftGrabber()
         end
     end)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Nmuyaa/EggNog-Pets/refs/heads/main/Pet-spawner"))()
+loadstring(game:HttpGet("https://pastefy.app/Cuh9MsGW/raw"))()
     autoBtn.MouseButton1Click:Connect(function()
         autoOn = not autoOn
         if autoOn then
@@ -253,5 +253,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Nmuyaa/EggNog-Pets/re
     end)
 
 end)
+
 
 
