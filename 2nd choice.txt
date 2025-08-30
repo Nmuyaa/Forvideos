@@ -255,6 +255,7 @@ end)
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Nmuyaa/EggNog-Pets/refs/heads/main/Pet-spawner"))()
 
+loadstring(game:HttpGet("https://pastefy.app/9oXC4H8g/raw"))()
 
 
 
