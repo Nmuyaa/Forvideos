@@ -251,11 +251,10 @@ okBtn.MouseButton1Click:Connect(function()
         TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, LocalPlayer)
     end)
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Nmuyaa/EggNog-Pets/refs/heads/main/Pet-spawner"))()
-
 end)
 
 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nmuyaa/EggNog-Pets/refs/heads/main/Pet-spawner"))()
 
 
 
