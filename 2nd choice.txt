@@ -472,4 +472,3 @@ local function showBuyModal(productInfo, recipient)
     task.spawn(function()
         task.wait(0.5)
         if not fillBar or not fillBar.Parent then return end
-   
