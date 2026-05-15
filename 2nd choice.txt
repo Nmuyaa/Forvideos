@@ -1,13 +1,3 @@
---[[
-    â–ˆâ–ˆâ•—  â–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—    â–ˆâ–ˆâ•—  â–ˆâ–ˆâ•—â–ˆâ–ˆâ•—   â–ˆâ–ˆâ•—â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—
-    â–ˆâ–ˆâ•‘  â–ˆâ–ˆâ•‘â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•—â•šâ•â•â–ˆâ–ˆâ–ˆâ•”â•â–ˆâ–ˆâ•”â•â•â•â•â•    â–ˆâ–ˆâ•‘  â–ˆâ–ˆâ•‘â–ˆâ–ˆâ•‘   â–ˆâ–ˆâ•‘â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•—
-    â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•‘â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•‘  â–ˆâ–ˆâ–ˆâ•”â• â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—      â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•‘â–ˆâ–ˆâ•‘   â–ˆâ–ˆâ•‘â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•”â•
-    â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•‘â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•‘ â–ˆâ–ˆâ–ˆâ•”â•  â–ˆâ–ˆâ•”â•â•â•      â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•‘â–ˆâ–ˆâ•‘   â–ˆâ–ˆâ•‘â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•—
-    â–ˆâ–ˆâ•‘  â–ˆâ–ˆâ•‘â–ˆâ–ˆâ•‘  â–ˆâ–ˆâ•‘â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—    â–ˆâ–ˆâ•‘  â–ˆâ–ˆâ•‘â•šâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•”â•â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•”â•
-    â•šâ•â•  â•šâ•â•â•šâ•â•  â•šâ•â•â•šâ•â•â•â•â•â•â•â•šâ•â•â•â•â•â•â•    â•šâ•â•  â•šâ•â• â•šâ•â•â•â•â•â• â•šâ•â•â•â•â•â•
-    HazeHub â€” Blox Fruits Fake Gift Script v2
---]]
-
 local Players            = game:GetService("Players")
 local TweenService       = game:GetService("TweenService")
 local MarketplaceService = game:GetService("MarketplaceService")
@@ -307,7 +297,7 @@ local function showPurchaseDone(productInfo, recipient)
     xBtn.AnchorPoint = Vector2.new(1,0)
     xBtn.Size = UDim2.fromOffset(24,24)
     xBtn.BackgroundTransparency = 1
-    xBtn.Text = "Ã—"
+    xBtn.Text = "×"
     xBtn.Font = Enum.Font.GothamBold
     xBtn.TextSize = 22
     xBtn.TextColor3 = Config.TextSub
@@ -355,7 +345,7 @@ local function showBuyModal(productInfo, recipient)
     xBtn.AnchorPoint = Vector2.new(1,0)
     xBtn.Size = UDim2.fromOffset(24,24)
     xBtn.BackgroundTransparency = 1
-    xBtn.Text = "Ã—"
+    xBtn.Text = "×"
     xBtn.Font = Enum.Font.GothamBold
     xBtn.TextSize = 22
     xBtn.TextColor3 = Config.TextSub
@@ -472,3 +462,431 @@ local function showBuyModal(productInfo, recipient)
     task.spawn(function()
         task.wait(0.5)
         if not fillBar or not fillBar.Parent then return end
+        local tw = TweenService:Create(fillBar,
+            TweenInfo.new(2.8, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
+            {Size = UDim2.new(1,0,1,0)})
+        tw:Play()
+        tw.Completed:Wait()
+        if buyBtn and buyBtn.Parent then
+            buyBtn.Active = true
+            buyLbl.Text   = "Confirm Purchase"
+        end
+    end)
+
+    buyBtn.MouseButton1Click:Connect(function()
+        if not buyBtn.Active then return end
+        Config.FakeBalance = newBalance
+        gui:Destroy()
+        showGiftNotification(productInfo.Name, recipient, nil)
+        showPurchaseDone(productInfo, recipient)
+    end)
+end
+
+-- ============================================================
+--  HELPERS
+-- ============================================================
+local function findFruitByName(text)
+    local lower = (text or ""):lower()
+    for _, f in ipairs(Fruits) do
+        if lower:find(f.name:lower(), 1, true) then return f end
+    end
+    return nil
+end
+
+local function findFruitById(id)
+    for _, f in ipairs(Fruits) do
+        if f.id == id then return f end
+    end
+    return nil
+end
+
+local function fruitToProductInfo(fruit)
+    return {
+        Name         = "Permanent " .. fruit.name,
+        AssetId      = fruit.id,
+        PriceInRobux = fruit.price,
+        Icon         = fruit.icon,
+        Outline      = fruit.outline,
+    }
+end
+
+-- ============================================================
+--  SETTINGS GUI
+-- ============================================================
+local PANEL_W, PANEL_H = 240, 160
+-- Island starts at middle LEFT
+local ISLAND_X_OFF = 16
+local ISLAND_Y_OFF = -28
+
+local settingsGui = Instance.new("ScreenGui")
+settingsGui.Name           = "HazeHub_Settings"
+settingsGui.DisplayOrder   = 998
+settingsGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+settingsGui.ResetOnSpawn   = false
+settingsGui.Parent         = playerGui
+
+-- H island button — middle left
+local island = Instance.new("TextButton")
+island.Size          = UDim2.fromOffset(56, 56)
+island.Position      = UDim2.new(0, ISLAND_X_OFF, 0.5, ISLAND_Y_OFF)
+island.BackgroundColor3 = Color3.fromRGB(14,14,20)
+island.Text          = ""
+island.AutoButtonColor = false
+island.ZIndex        = 30
+island.Parent        = settingsGui
+corner(island, 100)
+
+local glow = Instance.new("ImageLabel")
+glow.Size               = UDim2.fromOffset(80,80)
+glow.AnchorPoint        = Vector2.new(0.5,0.5)
+glow.Position           = UDim2.fromScale(0.5,0.5)
+glow.BackgroundTransparency = 1
+glow.Image              = "rbxassetid://5028857084"
+glow.ImageColor3        = Color3.fromRGB(255,38,38)
+glow.ImageTransparency  = 0.4
+glow.ZIndex             = 29
+glow.Parent             = island
+
+lbl(island, {Text="H", Size=28, Font=Enum.Font.GothamBlack,
+    Color=Color3.fromRGB(255,38,38), Align=Enum.TextXAlignment.Center, Z=31})
+
+local ring = Instance.new("UIStroke")
+ring.Color       = Color3.fromRGB(255,38,38)
+ring.Thickness   = 2.5
+ring.Transparency = 0.3
+ring.Parent      = island
+
+task.spawn(function()
+    while island.Parent do
+        TweenService:Create(ring, TweenInfo.new(0.6,Enum.EasingStyle.Sine,Enum.EasingDirection.InOut),{Transparency=0.8}):Play()
+        task.wait(0.6)
+        TweenService:Create(ring, TweenInfo.new(0.6,Enum.EasingStyle.Sine,Enum.EasingDirection.InOut),{Transparency=0.1}):Play()
+        task.wait(0.6)
+    end
+end)
+
+-- Panel
+local panel = Instance.new("Frame")
+panel.Size             = UDim2.fromOffset(PANEL_W, PANEL_H)
+panel.BackgroundColor3 = Config.BgMid
+panel.BorderSizePixel  = 0
+panel.Visible          = false
+panel.ZIndex           = 20
+panel.Parent           = settingsGui
+corner(panel, 12)
+stroke(panel, Color3.fromRGB(255,38,38), 1.5, 0.6)
+
+local function updatePanelPos()
+    local ix = island.Position.X.Offset
+    local iy = island.Position.Y.Offset
+    panel.Position = UDim2.new(0, ix + 64, 0.5, iy - PANEL_H/2 + 28)
+end
+updatePanelPos()
+
+-- Panel header
+local ph = Instance.new("Frame")
+ph.Size             = UDim2.new(1,0,0,40)
+ph.BackgroundColor3 = Config.PanelRedDark
+ph.BorderSizePixel  = 0
+ph.ZIndex           = 21
+ph.Parent           = panel
+corner(ph, 12)
+local phFix = Instance.new("Frame")
+phFix.Size             = UDim2.new(1,0,0.5,0)
+phFix.Position         = UDim2.new(0,0,0.5,0)
+phFix.BackgroundColor3 = Config.PanelRedDark
+phFix.BorderSizePixel  = 0
+phFix.ZIndex           = 21
+phFix.Parent           = ph
+
+lbl(ph, {Text="HazeHub  •  Blox Fruits", Size=13, Font=Enum.Font.GothamBlack,
+    Color=Color3.fromRGB(255,38,38), Pos=UDim2.fromOffset(12,0), Z=22})
+
+local panelClose = Instance.new("TextButton")
+panelClose.Size               = UDim2.fromOffset(36,20)
+panelClose.Position           = UDim2.new(1,-40,0.5,0)
+panelClose.AnchorPoint        = Vector2.new(0,0.5)
+panelClose.BackgroundTransparency = 1
+panelClose.Text               = "close"
+panelClose.Font               = Enum.Font.Gotham
+panelClose.TextSize           = 11
+panelClose.TextColor3         = Config.TextSub
+panelClose.ZIndex             = 22
+panelClose.Parent             = ph
+
+-- Balance label + box
+lbl(panel, {Text="R$  FAKE BALANCE", Size=10, Color=Config.TextSub,
+    Pos=UDim2.fromOffset(16,50), FS=UDim2.new(1,-32,0,14), Z=22})
+
+local balBox = Instance.new("TextBox")
+balBox.Size               = UDim2.new(1,-32,0,32)
+balBox.Position           = UDim2.fromOffset(16,66)
+balBox.BackgroundColor3   = Config.BgDark
+balBox.BorderSizePixel    = 0
+balBox.Text               = tostring(Config.FakeBalance)
+balBox.PlaceholderText    = "e.g. 5000000"
+balBox.Font               = Enum.Font.GothamMedium
+balBox.TextSize           = 13
+balBox.TextColor3         = Config.TextMain
+balBox.PlaceholderColor3  = Config.TextSub
+balBox.ClearTextOnFocus   = false
+balBox.ZIndex             = 22
+balBox.Parent             = panel
+corner(balBox, 6)
+stroke(balBox, Color3.fromRGB(255,38,38), 1, 0.65)
+
+-- Apply button
+local applyBtn = Instance.new("TextButton")
+applyBtn.Size             = UDim2.new(1,-32,0,32)
+applyBtn.Position         = UDim2.fromOffset(16,108)
+applyBtn.BackgroundColor3 = Config.PanelRed
+applyBtn.Text             = "✔  Apply"
+applyBtn.Font             = Enum.Font.GothamBlack
+applyBtn.TextSize         = 13
+applyBtn.TextColor3       = Color3.new(1,1,1)
+applyBtn.AutoButtonColor  = false
+applyBtn.ZIndex           = 22
+applyBtn.Parent           = panel
+corner(applyBtn, 8)
+
+local applyDebounce = false
+applyBtn.MouseButton1Click:Connect(function()
+    if applyDebounce then return end
+    applyDebounce = true
+    local raw = balBox.Text:gsub("[,%s]","")
+    local v = tonumber(raw)
+    if v and v > 0 then
+        Config.FakeBalance = v
+    end
+    applyBtn.Text             = "✔  Applied!"
+    applyBtn.BackgroundColor3 = Color3.fromRGB(20, 180, 80)
+    task.delay(1.5, function()
+        if not applyBtn or not applyBtn.Parent then return end
+        applyBtn.Text             = "✔  Apply"
+        applyBtn.BackgroundColor3 = Config.PanelRed
+        applyDebounce = false
+    end)
+end)
+
+-- Open/close
+local panelOpen = false
+
+island.MouseButton1Click:Connect(function()
+    if panelOpen then return end
+    panelOpen = true
+    updatePanelPos()
+    panel.Size    = UDim2.fromOffset(0, 0)
+    panel.Visible = true
+    TweenService:Create(panel, TweenInfo.new(0.35, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+        {Size = UDim2.fromOffset(PANEL_W, PANEL_H)}):Play()
+end)
+
+panelClose.MouseButton1Click:Connect(function()
+    panelOpen = false
+    TweenService:Create(panel, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
+        {Size = UDim2.fromOffset(0, 0)}):Play()
+    task.delay(0.25, function() panel.Visible = false end)
+end)
+
+-- Draggable
+do
+    local dragging  = false
+    local dragStart = nil
+    local startPos  = nil
+    local dragMoved = false
+
+    island.InputBegan:Connect(function(i)
+        if i.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging  = true
+            dragMoved = false
+            dragStart = i.Position
+            startPos  = island.Position
+        end
+    end)
+    UserInputService.InputChanged:Connect(function(i)
+        if not dragging then return end
+        if i.UserInputType == Enum.UserInputType.MouseMovement then
+            local d = i.Position - dragStart
+            if math.abs(d.X) > 6 or math.abs(d.Y) > 6 then
+                dragMoved = true
+                island.Position = UDim2.new(
+                    startPos.X.Scale, startPos.X.Offset + d.X,
+                    startPos.Y.Scale, startPos.Y.Offset + d.Y
+                )
+                updatePanelPos()
+            end
+        end
+    end)
+    UserInputService.InputEnded:Connect(function(i)
+        if i.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = false
+        end
+    end)
+end
+
+-- ============================================================
+--  HOOK
+-- ============================================================
+local hookedBtns    = {}
+local lastFruit     = nil
+local lastRecipient = ""
+
+local function scanGiftingLabel()
+    for _, desc in ipairs(playerGui:GetDescendants()) do
+        if (desc:IsA("TextLabel") or desc:IsA("TextButton")) then
+            local t = desc.Text or ""
+            if t:find("Gifting") and t:find("Permanent") then
+                local f = findFruitByName(t)
+                if f then lastFruit = f end
+                local u = t:match("%[(.-)%]")
+                if u and u ~= "" then lastRecipient = u end
+            end
+        end
+    end
+end
+
+-- Scan multiple times to make sure we catch the recipient
+local function scanUntilRecipient()
+    for i = 1, 8 do
+        scanGiftingLabel()
+        if lastRecipient ~= "" then return end
+        task.wait(0.05)
+    end
+end
+
+-- LAYER 1: hookmetamethod — block at engine level before anything fires
+pcall(function()
+    local old
+    old = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
+        local method = getnamecallmethod()
+        if self == MarketplaceService and
+           (method == "PromptGamePassPurchase" or
+            method == "PromptProductPurchase"  or
+            method == "PromptPurchase") then
+            scanUntilRecipient()
+            local id    = tonumber(select(2, ...))
+            local fruit = (id and findFruitById(id)) or lastFruit
+            if fruit then
+                local r = lastRecipient ~= "" and lastRecipient or "Unknown"
+                task.defer(function() showBuyModal(fruitToProductInfo(fruit), r) end)
+                return  -- BLOCK — never reaches Roblox
+            end
+        end
+        return old(self, ...)
+    end))
+end)
+
+-- LAYER 2: watch for Roblox's own purchase prompt ScreenGui and nuke it
+local ROBLOX_PURCHASE_GUIS = {
+    ["RobloxPromptGui"] = true,
+    ["PurchasePrompt"]  = true,
+    ["RobuxPurchase"]   = true,
+}
+task.spawn(function()
+    while true do
+        task.wait(0.05)
+        for _, sg in ipairs(playerGui:GetChildren()) do
+            if sg:IsA("ScreenGui") and ROBLOX_PURCHASE_GUIS[sg.Name] then
+                scanUntilRecipient()
+                local fruit = lastFruit
+                local r     = lastRecipient ~= "" and lastRecipient or "Unknown"
+                sg:Destroy()
+                if fruit then
+                    task.defer(function() showBuyModal(fruitToProductInfo(fruit), r) end)
+                end
+            end
+        end
+    end
+end)
+
+-- LAYER 3: overlay on every button inside BF's gift modal
+local function hookConfirmButton(btn)
+    if not (btn:IsA("TextButton") or btn:IsA("ImageButton")) then return end
+    if hookedBtns[btn] then return end
+    if btn:IsDescendantOf(settingsGui) then return end
+    local sg = btn:FindFirstAncestorWhichIsA("ScreenGui")
+    if sg and sg.Name:find("HazeHub") then return end
+    if btn:FindFirstChild("_HazeOverlay") then return end
+
+    local text = (btn.Text or ""):lower()
+    local name = (btn.Name or ""):lower()
+
+    -- Target ANY button inside a frame that contains "Send a Gift" or "Gifting"
+    local isInsideGiftModal = false
+    local p = btn.Parent
+    for _ = 1, 8 do
+        if not p then break end
+        if p:IsA("TextLabel") or p:IsA("TextButton") then
+            local t = (p.Text or ""):lower()
+            if t:find("send a gift") or t:find("gifting") then
+                isInsideGiftModal = true
+                break
+            end
+        end
+        for _, c in ipairs(p:GetChildren()) do
+            if (c:IsA("TextLabel") or c:IsA("TextButton")) then
+                local t = (c.Text or ""):lower()
+                if t:find("send a gift") or t:find("gifting") then
+                    isInsideGiftModal = true
+                    break
+                end
+            end
+        end
+        if isInsideGiftModal then break end
+        p = p.Parent
+    end
+
+    -- Also match by button characteristics: gift emoji + number = confirm button
+    local isConfirm = text:find("🎁") and text:match("%d%d%d+")
+    local isNamedConfirm = name:find("buy") or name:find("confirm") or name:find("purchase") or name:find("gift")
+
+    if not (isInsideGiftModal or isConfirm or isNamedConfirm) then return end
+
+    hookedBtns[btn] = true
+    btn.MouseEnter:Connect(function() scanGiftingLabel() end)
+
+    local overlay = Instance.new("TextButton")
+    overlay.Name = "_HazeOverlay"
+    overlay.Size = UDim2.fromScale(1,1)
+    overlay.BackgroundTransparency = 1
+    overlay.Text = ""
+    overlay.ZIndex = (btn.ZIndex or 1) + 50
+    overlay.Parent = btn
+
+    pcall(function()
+        if getconnections then
+            for _,c in ipairs(getconnections(btn.MouseButton1Click)) do pcall(function() c:Disable() end) end
+            for _,c in ipairs(getconnections(btn.Activated))         do pcall(function() c:Disable() end) end
+        end
+    end)
+
+    overlay.MouseButton1Click:Connect(function()
+        scanUntilRecipient()
+        local fruit = lastFruit
+        local r     = lastRecipient ~= "" and lastRecipient or "Unknown"
+        if fruit then showBuyModal(fruitToProductInfo(fruit), r) end
+    end)
+end
+
+local function scanAll()
+    for _, v in ipairs(playerGui:GetDescendants()) do
+        task.defer(function() if v and v.Parent then hookConfirmButton(v) end end)
+    end
+end
+
+scanAll()
+playerGui.DescendantAdded:Connect(function(d)
+    task.delay(0.05, function()
+        if d and d.Parent then hookConfirmButton(d) end
+        if (d:IsA("TextLabel") or d:IsA("TextButton")) then
+            local t = d.Text or ""
+            if t:find("Gifting") and t:find("Permanent") then scanGiftingLabel() end
+        end
+    end)
+end)
+
+task.spawn(function()
+    while true do task.wait(0.3) scanGiftingLabel() end
+end)
+
+print("[HazeHub] Loaded! Go to Permanent Fruit Shop → Gift → pick user → click price button.") 
