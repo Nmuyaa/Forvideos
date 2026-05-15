@@ -394,11 +394,11 @@ local function showBuyModal(productInfo, recipient)
     local xBtn = Instance.new("TextButton")
     xBtn.Position = UDim2.new(1,-10,0,10)
     xBtn.AnchorPoint = Vector2.new(1,0)
-    xBtn.Size = UDim2.fromOffset(26,26)
+    xBtn.Size = UDim2.fromOffset(32,32)
     xBtn.BackgroundTransparency = 1
-    xBtn.Text = "×"
+    xBtn.Text = "X"
     xBtn.Font = Enum.Font.GothamMedium
-    xBtn.TextSize = 24
+    xBtn.TextSize = 26
     xBtn.TextColor3 = Config.TextSub
     xBtn.ZIndex = 25
     xBtn.Parent = modal
