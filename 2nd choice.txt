@@ -502,13 +502,19 @@ local function showBuyModal(productInfo, recipient)
     end)
 
    buyBtn.MouseButton1Click:Connect(function()
-        if not buyBtn.Active then return end
-        Config.FakeBalance = newBalance
-        gui:Destroy()
-        showGiftNotification(productInfo.Name, recipient, nil)
+    if not buyBtn.Active then return end
+
+    Config.FakeBalance = newBalance
+    gui:Destroy()
+
+    -- Show sending notification first
+    showGiftNotification(productInfo.Name, recipient, nil)
+
+    -- Wait 2 seconds before purchase completed popup
+    task.delay(2, function()
         showPurchaseDone(productInfo, recipient)
     end)
-end
+end)
 
 
 -- ============================================================
