@@ -311,7 +311,7 @@ local function showPurchaseDone(productInfo, recipient, onFadeComplete)
     xBtn.AnchorPoint = Vector2.new(1,0)
     xBtn.Size = UDim2.fromOffset(40,40)
     xBtn.BackgroundTransparency = 1
-    xBtn.Text = ✖"
+    xBtn.Text = "✖"
     xBtn.Font = Enum.Font.Gotham
     xBtn.TextSize = 32
     xBtn.TextColor3 = Config.TextSub
