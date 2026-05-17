@@ -75,14 +75,12 @@ local Fruits = {
     {name="Shadow",  id=44669704, price=2900, icon=BLOX_LOGO, outline=Color3.fromRGB(80,20,120)   },
     {name="Venom",   id=44669708, price=3000, icon=BLOX_LOGO, outline=Color3.fromRGB(60,180,40)   },
     {name="Control", id=44669712, price=4000,
-        icon = "rbxthumb://type=Asset&id=107615845549772&w=150&h=150",
+        icon    = "rbxthumb://type=Asset&id=11330851538&w=150&h=150",
         outline = Color3.fromRGB(40,180,255)
     },
-    
-    
-    {name="Spirit",  id=44669716, price=2550, icon=BLOX_LOGO, outline=Color3.fromRGB(255,220,80)  },
+    {name="Spirit",  id=44669716, price=3400, icon=BLOX_LOGO, outline=Color3.fromRGB(255,220,80)  },
     {name="Dragon",  id=44669720, price=5000,
-        icon = "rbxthumb://type=Asset&id=71450863629602&w=150&h=150",
+        icon    = "rbxthumb://type=Asset&id=71929406555073&w=150&h=150",
         outline = Color3.fromRGB(180, 60, 20)
     },
     {name="Leopard", id=44669724, price=3500, icon=BLOX_LOGO, outline=Color3.fromRGB(200,160,20)  },
@@ -90,7 +88,7 @@ local Fruits = {
         icon    = "rbxthumb://type=Asset&id=102325862990442&w=150&h=150",
         outline = Color3.fromRGB(20, 100, 220)
     },
-    {name="Yeti",    id=44669730, price=3000, icon = "rbxthumb://type=Asset&id=70681257475214&w=150&h=150", outline=Color3.fromRGB(160,220,255) },
+    {name="Yeti",    id=44669730, price=3000, icon=BLOX_LOGO, outline=Color3.fromRGB(160,220,255) },
     {name="Tiger",   id=70540969542096, price=3000, icon="rbxthumb://type=Asset&id=70540969542096&w=150&h=150", outline=Color3.fromRGB(220,140,20)  },
 }
 
@@ -181,7 +179,7 @@ local function showGiftNotification(fruitName, recipient, onDone)
     line1.TextXAlignment     = Enum.TextXAlignment.Center
     line1.TextTransparency   = 1
     line1.RichText           = true
-    line1.Text               = 'Sending gift <font color="rgb(255,200,50)">&lt; ' "Permanent" .. cleanName .. '&gt;</font> to ' .. recipient .. '...'
+    line1.Text               = 'Sending gift <font color="rgb(255,200,50)">&lt;Permanent ' .. cleanName .. '&gt;</font> to ' .. recipient .. '...'
     line1.Parent             = container
 
     local line2 = Instance.new("TextLabel")
@@ -388,17 +386,17 @@ local function showBuyModal(productInfo, recipient)
     stroke(modal, Color3.fromRGB(90,90,100), 1.5, 0.3)
 
     -- Title
-    lbl(modal, {Text="Buy Item", Size=19, Pos=UDim2.fromOffset(20,14), FS=UDim2.new(1,-80,0,28)})
+    lbl(modal, {Text="Buy Item", Size=18, Pos=UDim2.fromOffset(20,14), FS=UDim2.new(1,-80,0,28)})
 
     -- X button
     local xBtn = Instance.new("TextButton")
     xBtn.Position = UDim2.new(1,-10,0,10)
     xBtn.AnchorPoint = Vector2.new(1,0)
-    xBtn.Size = UDim2.fromOffset(26,26)
+    xBtn.Size = UDim2.fromOffset(24,24)
     xBtn.BackgroundTransparency = 1
     xBtn.Text = "×"
-    xBtn.Font = Enum.Font.GothamMedium
-    xBtn.TextSize = 24
+    xBtn.Font = Enum.Font.GothamBold
+    xBtn.TextSize = 22
     xBtn.TextColor3 = Config.TextSub
     xBtn.ZIndex = 25
     xBtn.Parent = modal
@@ -485,10 +483,28 @@ local function showBuyModal(productInfo, recipient)
     fillBar.Parent = buyBtn
     corner(fillBar, 8)
 
-    local buyLbl = lbl(buyBtn, {Text="Buy", Size=15, Z=3, Align=Enum.TextXAlignment.Center})
+    local buyLbl = lbl(buyBtn, {Text="Confirm Purchase", Size=15, Z=3, Align=Enum.TextXAlignment.Center})
 
     -- Footer "Gifting [user] <fruit>"
-    
+    local footer = Instance.new("Frame")
+    footer.Size = UDim2.new(1,0,0,26)
+    footer.Position = UDim2.new(0,0,1,-26)
+    footer.BackgroundColor3 = Config.BgDark
+    footer.BorderSizePixel = 0
+    footer.ZIndex = 4
+    footer.Parent = modal
+    corner(footer, 14)
+    local ftFix = Instance.new("Frame")
+    ftFix.Size = UDim2.new(1,0,0.5,0)
+    ftFix.BackgroundColor3 = Config.BgDark
+    ftFix.BorderSizePixel = 0
+    ftFix.ZIndex = 4
+    ftFix.Parent = footer
+    lbl(footer, {
+        Text  = "Gifting [" .. recipient .. "] <" .. productInfo.Name .. ">",
+        Size  = 11, Color = Color3.fromRGB(210,210,220),
+        Align = Enum.TextXAlignment.Center, Z = 5,
+    })
 
     modal:TweenPosition(UDim2.fromScale(0.5,0.5), Enum.EasingDirection.Out, Enum.EasingStyle.Back, 0.45, true)
 
@@ -502,7 +518,7 @@ local function showBuyModal(productInfo, recipient)
         tw.Completed:Wait()
         if buyBtn and buyBtn.Parent then
             buyBtn.Active = true
-            buyLbl.Text   = "Buy"
+            buyLbl.Text   = "Confirm Purchase"
         end
     end)
 
@@ -535,7 +551,7 @@ end
 
 local function fruitToProductInfo(fruit)
     return {
-        Name         = fruit.name,
+        Name         = "Permanent " .. fruit.name,
         AssetId      = fruit.id,
         PriceInRobux = fruit.price,
         Icon         = fruit.icon,
