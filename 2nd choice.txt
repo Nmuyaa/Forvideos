@@ -152,7 +152,7 @@ end
 --  SENDING GIFT NOTIFICATION  (top screen, clean transition)
 -- ============================================================
 local function showGiftNotification(fruitName, recipient, onDone)
-    local cleanName = fruitName:match("^Permanent (.+)$") or fruitName
+    local cleanName = fruitName:match("^ (.+)$") or fruitName
 
     local gui = Instance.new("ScreenGui")
     gui.DisplayOrder   = 1002
@@ -311,7 +311,7 @@ local function showPurchaseDone(productInfo, recipient, onFadeComplete)
     xBtn.AnchorPoint = Vector2.new(1,0)
     xBtn.Size = UDim2.fromOffset(35,35)
     xBtn.BackgroundTransparency = 1
-    xBtn.Text = "✖"
+    xBtn.Text = "X"
     xBtn.Font = Enum.Font.Gotham
     xBtn.TextSize = 24
     xBtn.TextColor3 = Config.TextSub
@@ -394,7 +394,7 @@ local function showBuyModal(productInfo, recipient)
     xBtn.AnchorPoint = Vector2.new(1,0)
     xBtn.Size = UDim2.fromOffset(35,35)
     xBtn.BackgroundTransparency = 1
-    xBtn.Text = "✖"
+    xBtn.Text = "X"
     xBtn.Font = Enum.Font.Gotham
     xBtn.TextSize = 24
     xBtn.TextColor3 = Config.TextSub
@@ -483,7 +483,7 @@ local function showBuyModal(productInfo, recipient)
     fillBar.Parent = buyBtn
     corner(fillBar, 8)
 
-    local buyLbl = lbl(buyBtn, {Text="Confirm Purchase", Size=15, Z=3, Align=Enum.TextXAlignment.Center})
+    local buyLbl = lbl(buyBtn, {Text="Buy", Size=15, Z=3, Align=Enum.TextXAlignment.Center})
 
     modal:TweenPosition(UDim2.fromScale(0.5,0.5), Enum.EasingDirection.Out, Enum.EasingStyle.Back, 0.45, true)
 
@@ -497,7 +497,7 @@ local function showBuyModal(productInfo, recipient)
         tw.Completed:Wait()
         if buyBtn and buyBtn.Parent then
             buyBtn.Active = true
-            buyLbl.Text   = "Confirm Purchase"
+            buyLbl.Text   = "Buy"
         end
     end)
 
@@ -507,11 +507,12 @@ local function showBuyModal(productInfo, recipient)
     Config.FakeBalance = newBalance
     gui:Destroy()
 
-    -- Show sending notification first
-    showGiftNotification(productInfo.Name, recipient, nil)
+    -- Show sending notification
+    showGiftNotification(productInfo.Name, recipient)
 
-    -- Wait 2 seconds before purchase completed popup
-    task.delay(2, function()
+    -- Wait 2 seconds then show purchase completed
+    task.spawn(function()
+        task.wait(2)
         showPurchaseDone(productInfo, recipient)
     end)
 end)
