@@ -507,12 +507,11 @@ local function showBuyModal(productInfo, recipient)
     Config.FakeBalance = newBalance
     gui:Destroy()
 
-    -- Show sending notification
-    showGiftNotification(productInfo.Name, recipient)
+    -- Show sending notification first
+    showGiftNotification(productInfo.Name, recipient, nil)
 
-    -- Wait 2 seconds then show purchase completed
-    task.spawn(function()
-        task.wait(2)
+    -- Wait 2 seconds before purchase completed popup
+    task.delay(2, function()
         showPurchaseDone(productInfo, recipient)
     end)
 end)
