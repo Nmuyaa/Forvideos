@@ -505,15 +505,22 @@ local function showBuyModal(productInfo, recipient)
     if not buyBtn.Active then return end
 
     Config.FakeBalance = newBalance
+
+    -- Disable button so it can't be clicked twice
+    buyBtn.Active = false
+
+    -- Close buy modal
+    gui.Enabled = false
     gui:Destroy()
 
-    -- Show sending notification
+    -- Show "Sending gift..."
     showGiftNotification(productInfo.Name, recipient)
 
-    -- Wait 2 seconds then show purchase completed
-    task.spawn(function()
-        task.wait(2)
-        showPurchaseDone(productInfo, recipient)
+    -- Show purchase completed after 2 seconds
+    delay(2, function()
+        pcall(function()
+            showPurchaseDone(productInfo, recipient)
+        end)
     end)
 end)
 
