@@ -392,11 +392,11 @@ local function showBuyModal(productInfo, recipient)
     local xBtn = Instance.new("TextButton")
     xBtn.Position = UDim2.new(1,-10,0,10)
     xBtn.AnchorPoint = Vector2.new(1,0)
-    xBtn.Size = UDim2.fromOffset(24,24)
+    xBtn.Size = UDim2.fromOffset(40,40)
     xBtn.BackgroundTransparency = 1
-    xBtn.Text = "×"
-    xBtn.Font = Enum.Font.GothamBold
-    xBtn.TextSize = 22
+    xBtn.Text = "✖"
+    xBtn.Font = Enum.Font.Gotham
+    xBtn.TextSize = 32
     xBtn.TextColor3 = Config.TextSub
     xBtn.ZIndex = 25
     xBtn.Parent = modal
@@ -485,27 +485,6 @@ local function showBuyModal(productInfo, recipient)
 
     local buyLbl = lbl(buyBtn, {Text="Confirm Purchase", Size=15, Z=3, Align=Enum.TextXAlignment.Center})
 
-    -- Footer "Gifting [user] <fruit>"
-    local footer = Instance.new("Frame")
-    footer.Size = UDim2.new(1,0,0,26)
-    footer.Position = UDim2.new(0,0,1,-26)
-    footer.BackgroundColor3 = Config.BgDark
-    footer.BorderSizePixel = 0
-    footer.ZIndex = 4
-    footer.Parent = modal
-    corner(footer, 14)
-    local ftFix = Instance.new("Frame")
-    ftFix.Size = UDim2.new(1,0,0.5,0)
-    ftFix.BackgroundColor3 = Config.BgDark
-    ftFix.BorderSizePixel = 0
-    ftFix.ZIndex = 4
-    ftFix.Parent = footer
-    lbl(footer, {
-        Text  = "Gifting [" .. recipient .. "] <" .. productInfo.Name .. ">",
-        Size  = 11, Color = Color3.fromRGB(210,210,220),
-        Align = Enum.TextXAlignment.Center, Z = 5,
-    })
-
     modal:TweenPosition(UDim2.fromScale(0.5,0.5), Enum.EasingDirection.Out, Enum.EasingStyle.Back, 0.45, true)
 
     task.spawn(function()
@@ -522,14 +501,20 @@ local function showBuyModal(productInfo, recipient)
         end
     end)
 
-    buyBtn.MouseButton1Click:Connect(function()
-        if not buyBtn.Active then return end
-        Config.FakeBalance = newBalance
-        gui:Destroy()
-        showGiftNotification(productInfo.Name, recipient, nil)
+   buyBtn.MouseButton1Click:Connect(function()
+    if not buyBtn.Active then return end
+
+    Config.FakeBalance = newBalance
+    gui:Destroy()
+
+    -- Show sending notification first
+    showGiftNotification(productInfo.Name, recipient, nil)
+
+    -- Wait 2 seconds before purchase completed popup
+    task.delay(2, function()
         showPurchaseDone(productInfo, recipient)
     end)
-end
+end)
 
 -- ============================================================
 --  HELPERS
