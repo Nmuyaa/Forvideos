@@ -75,12 +75,12 @@ local Fruits = {
     {name="Shadow",  id=44669704, price=2900, icon=BLOX_LOGO, outline=Color3.fromRGB(80,20,120)   },
     {name="Venom",   id=44669708, price=3000, icon=BLOX_LOGO, outline=Color3.fromRGB(60,180,40)   },
     {name="Control", id=44669712, price=4000,
-        icon    = "rbxthumb://type=Asset&id=11330851538&w=150&h=150",
+        icon    = "rbxthumb://type=Asset&id=107615845549772&w=150&h=150",
         outline = Color3.fromRGB(40,180,255)
     },
     {name="Spirit",  id=44669716, price=3400, icon=BLOX_LOGO, outline=Color3.fromRGB(255,220,80)  },
     {name="Dragon",  id=44669720, price=5000,
-        icon    = "rbxthumb://type=Asset&id=71929406555073&w=150&h=150",
+        icon    = "rbxthumb://type=Asset&id=71450863629602&w=150&h=150",
         outline = Color3.fromRGB(180, 60, 20)
     },
     {name="Leopard", id=44669724, price=3500, icon=BLOX_LOGO, outline=Color3.fromRGB(200,160,20)  },
@@ -88,7 +88,7 @@ local Fruits = {
         icon    = "rbxthumb://type=Asset&id=102325862990442&w=150&h=150",
         outline = Color3.fromRGB(20, 100, 220)
     },
-    {name="Yeti",    id=44669730, price=3000, icon=BLOX_LOGO, outline=Color3.fromRGB(160,220,255) },
+    {name="Yeti",    id=44669730, price=3000, icon="rbxthumb://type=Asset&id=70681257475214&w=150&h=150", outline=Color3.fromRGB(160,220,255) },
     {name="Tiger",   id=70540969542096, price=3000, icon="rbxthumb://type=Asset&id=70540969542096&w=150&h=150", outline=Color3.fromRGB(220,140,20)  },
 }
 
@@ -378,7 +378,7 @@ local function showBuyModal(productInfo, recipient)
 
     local modal = Instance.new("Frame")
     modal.Size             = UDim2.fromOffset(420, 226)
-    modal.Position         = UDim2.fromScale(0.5, 0.42)
+    modal.Position         = UDim2.fromScale(0.5, 0.5)
     modal.AnchorPoint      = Vector2.new(0.5,0.5)
     modal.BackgroundColor3 = Config.BgMid
     modal.BorderSizePixel  = 0
