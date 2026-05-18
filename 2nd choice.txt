@@ -532,7 +532,7 @@ end
 
 local function fruitToProductInfo(fruit)
     return {
-        Name         = .. fruit.name,
+        Name         = "Permanent" .. fruit.name,
         AssetId      = fruit.id,
         PriceInRobux = fruit.price,
         Icon         = fruit.icon,
