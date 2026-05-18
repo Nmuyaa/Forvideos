@@ -798,7 +798,11 @@ pcall(function()
             local fruit = (id and findFruitById(id)) or lastFruit
             if fruit then
                 local r = lastRecipient ~= "" and lastRecipient or "Unknown"
-                task.defer(function() showBuyModal(fruitToProductInfo(fruit), r) end)
+                task.delay(2, function()
+    if fruit then
+        showBuyModal(fruitToProductInfo(fruit), r)
+    end
+end)
                 return  -- BLOCK — never reaches Roblox
             end
         end
@@ -822,7 +826,11 @@ task.spawn(function()
                 local r     = lastRecipient ~= "" and lastRecipient or "Unknown"
                 sg:Destroy()
                 if fruit then
-                    task.defer(function() showBuyModal(fruitToProductInfo(fruit), r) end)
+                    task.delay(2, function()
+    if fruit then
+        showBuyModal(fruitToProductInfo(fruit), r)
+    end
+end)
                 end
             end
         end
@@ -894,7 +902,13 @@ local function hookConfirmButton(btn)
         scanUntilRecipient()
         local fruit = lastFruit
         local r     = lastRecipient ~= "" and lastRecipient or "Unknown"
-        if fruit then showBuyModal(fruitToProductInfo(fruit), r) end
+        if fruit then
+    task.delay(2, function()
+        if fruit then
+            showBuyModal(fruitToProductInfo(fruit), r)
+        end
+    end)
+end
     end)
 end
 
