@@ -92,6 +92,7 @@ local Fruits = {
     {name="Tiger",   id=70540969542096, price=3000, icon="rbxthumb://type=Asset&id=70540969542096&w=150&h=150", outline=Color3.fromRGB(220,140,20)  },
 }
 
+
 -- ============================================================
 --  UTILITIES
 -- ============================================================
@@ -179,7 +180,7 @@ local function showGiftNotification(fruitName, recipient, onDone)
     line1.TextXAlignment     = Enum.TextXAlignment.Center
     line1.TextTransparency   = 1
     line1.RichText           = true
-    line1.Text               = 'Sending gift <font color="rgb(255,200,50)">&lt;Permanent ' .. cleanName .. '&gt;</font> to ' .. recipient .. '...'
+    line1.Text               = 'Sending gift <font color="rgb(255,200,50)">&lt; ' "Permanent" .. cleanName .. '&gt;</font> to ' .. recipient .. '...'
     line1.Parent             = container
 
     local line2 = Instance.new("TextLabel")
@@ -309,11 +310,11 @@ local function showPurchaseDone(productInfo, recipient, onFadeComplete)
     local xBtn = Instance.new("TextButton")
     xBtn.Position = UDim2.new(1,-10,0,10)
     xBtn.AnchorPoint = Vector2.new(1,0)
-    xBtn.Size = UDim2.fromOffset(35,35)
+    xBtn.Size = UDim2.fromOffset(32,32)
     xBtn.BackgroundTransparency = 1
-    xBtn.Text = "x"
-    xBtn.Font = Enum.Font.GothamMedium
-    xBtn.TextSize = 24
+    xBtn.Text = "×"
+    xBtn.Font = Enum.Font.GothamBold
+    xBtn.TextSize = 26
     xBtn.TextColor3 = Config.TextSub
     xBtn.TextTransparency = 1
     xBtn.ZIndex = 10
@@ -358,6 +359,7 @@ local function showPurchaseDone(productInfo, recipient, onFadeComplete)
     task.delay(4.0, fadeOutAndDestroy)
 end
 
+
 -- ============================================================
 --  BUY ITEM MODAL  (PLS DONATE style)
 -- ============================================================
@@ -389,16 +391,17 @@ local function showBuyModal(productInfo, recipient)
     lbl(modal, {Text="Buy Item", Size=18, Pos=UDim2.fromOffset(20,14), FS=UDim2.new(1,-80,0,28)})
 
     -- X button
-    local xBtn = Instance.new("TextButton")
+   local xBtn = Instance.new("TextButton")
     xBtn.Position = UDim2.new(1,-10,0,10)
     xBtn.AnchorPoint = Vector2.new(1,0)
-    xBtn.Size = UDim2.fromOffset(35,35)
+    xBtn.Size = UDim2.fromOffset(32,32)
     xBtn.BackgroundTransparency = 1
-    xBtn.Text = "x"
-    xBtn.Font = Enum.Font.GothamMedium
-    xBtn.TextSize = 24
+    xBtn.Text = "×"
+    xBtn.Font = Enum.Font.GothamBold
+    xBtn.TextSize = 26
     xBtn.TextColor3 = Config.TextSub
-    xBtn.ZIndex = 25
+    xBtn.TextTransparency = 1
+    xBtn.ZIndex = 10
     xBtn.Parent = modal
     xBtn.MouseButton1Click:Connect(function() gui:Destroy() end)
 
@@ -485,6 +488,7 @@ local function showBuyModal(productInfo, recipient)
 
     local buyLbl = lbl(buyBtn, {Text="Buy", Size=15, Z=3, Align=Enum.TextXAlignment.Center})
 
+
     modal:TweenPosition(UDim2.fromScale(0.5,0.5), Enum.EasingDirection.Out, Enum.EasingStyle.Back, 0.45, true)
 
     task.spawn(function()
@@ -501,7 +505,7 @@ local function showBuyModal(productInfo, recipient)
         end
     end)
 
-   buyBtn.MouseButton1Click:Connect(function()
+    buyBtn.MouseButton1Click:Connect(function()
         if not buyBtn.Active then return end
         Config.FakeBalance = newBalance
         gui:Destroy()
@@ -509,8 +513,6 @@ local function showBuyModal(productInfo, recipient)
         showPurchaseDone(productInfo, recipient)
     end)
 end
-
-
 
 -- ============================================================
 --  HELPERS
