@@ -58,7 +58,7 @@ local Fruits = {
     {name="Magma",   id=44669663, price=850,  icon=BLOX_LOGO, outline=Color3.fromRGB(200,60,20)   },
     {name="Quake",   id=44669668, price=1000, icon=BLOX_LOGO, outline=Color3.fromRGB(160,140,100) },
     {name="Buddha",  id=44669672, price=1650,
-        icon    = "rbxthumb://type=Asset&id=101573129815434&w=150&h=150",
+        icon    = "rbxthumb://type=Asset&id=11337649787&w=150&h=150",
         outline = Color3.fromRGB(220,180,20)
     },
     {name="Love",    id=44669676, price=1300, icon=BLOX_LOGO, outline=Color3.fromRGB(255,100,160) },
@@ -66,12 +66,12 @@ local Fruits = {
     {name="Sound",   id=44669683, price=1700, icon=BLOX_LOGO, outline=Color3.fromRGB(180,100,220) },
     {name="Phoenix", id=44669687, price=1800, icon=BLOX_LOGO, outline=Color3.fromRGB(220,120,20)  },
     {name="Portal",  id=44669691, price=2000,
-        icon    = "rbxthumb://type=Asset&id=78463213702905&w=150&h=150",
+        icon    = "rbxthumb://type=Asset&id=12181754234&w=150&h=150",
         outline = Color3.fromRGB(100,180,255)
     },
     {name="Paw",     id=44669694, price=2000, icon=BLOX_LOGO, outline=Color3.fromRGB(220,100,140) },
     {name="Gravity", id=44669697, price=2500, icon=BLOX_LOGO, outline=Color3.fromRGB(140,60,200)  },
-    {name="Dough",   id=44669701, price=2800, icon    = "rbxthumb://type=Asset&id=72428809899422&w=150&h=150", outline=Color3.fromRGB(220,180,100) },
+    {name="Dough",   id=44669701, price=2800, icon=BLOX_LOGO, outline=Color3.fromRGB(220,180,100) },
     {name="Shadow",  id=44669704, price=2900, icon=BLOX_LOGO, outline=Color3.fromRGB(80,20,120)   },
     {name="Venom",   id=44669708, price=3000, icon=BLOX_LOGO, outline=Color3.fromRGB(60,180,40)   },
     {name="Control", id=44669712, price=4000,
@@ -91,7 +91,6 @@ local Fruits = {
     {name="Yeti",    id=44669730, price=3000, icon=BLOX_LOGO, outline=Color3.fromRGB(160,220,255) },
     {name="Tiger",   id=70540969542096, price=3000, icon="rbxthumb://type=Asset&id=70540969542096&w=150&h=150", outline=Color3.fromRGB(220,140,20)  },
 }
-
 
 -- ============================================================
 --  UTILITIES
@@ -445,8 +444,28 @@ local function showBuyModal(productInfo, recipient)
     fillBar.Parent = buyBtn
     corner(fillBar, 8)
 
-    local buyLbl = lbl(buyBtn, {Text="Buy", Size=15, Z=3, Align=Enum.TextXAlignment.Center})
+    local buyLbl = lbl(buyBtn, {Text="Confirm Purchase", Size=15, Z=3, Align=Enum.TextXAlignment.Center})
 
+    -- Footer "Gifting [user] <fruit>"
+    local footer = Instance.new("Frame")
+    footer.Size = UDim2.new(1,0,0,26)
+    footer.Position = UDim2.new(0,0,1,-26)
+    footer.BackgroundColor3 = Config.BgDark
+    footer.BorderSizePixel = 0
+    footer.ZIndex = 4
+    footer.Parent = modal
+    corner(footer, 14)
+    local ftFix = Instance.new("Frame")
+    ftFix.Size = UDim2.new(1,0,0.5,0)
+    ftFix.BackgroundColor3 = Config.BgDark
+    ftFix.BorderSizePixel = 0
+    ftFix.ZIndex = 4
+    ftFix.Parent = footer
+    lbl(footer, {
+        Text  = "Gifting [" .. recipient .. "] <" .. productInfo.Name .. ">",
+        Size  = 11, Color = Color3.fromRGB(210,210,220),
+        Align = Enum.TextXAlignment.Center, Z = 5,
+    })
 
     modal:TweenPosition(UDim2.fromScale(0.5,0.5), Enum.EasingDirection.Out, Enum.EasingStyle.Back, 0.45, true)
 
@@ -460,7 +479,7 @@ local function showBuyModal(productInfo, recipient)
         tw.Completed:Wait()
         if buyBtn and buyBtn.Parent then
             buyBtn.Active = true
-            buyLbl.Text   = "Buy"
+            buyLbl.Text   = "Confirm Purchase"
         end
     end)
 
@@ -493,7 +512,7 @@ end
 
 local function fruitToProductInfo(fruit)
     return {
-        Name         = .. fruit.name,
+        Name         = "Permanent " .. fruit.name,
         AssetId      = fruit.id,
         PriceInRobux = fruit.price,
         Icon         = fruit.icon,
