@@ -311,8 +311,8 @@ local function showPurchaseDone(productInfo, recipient, onFadeComplete)
     xBtn.AnchorPoint = Vector2.new(1,0)
     xBtn.Size = UDim2.fromOffset(35,35)
     xBtn.BackgroundTransparency = 1
-    xBtn.Text = "X"
-    xBtn.Font = Enum.Font.Gotham
+    xBtn.Text = "x"
+    xBtn.Font = Enum.Font.GothamMedium
     xBtn.TextSize = 24
     xBtn.TextColor3 = Config.TextSub
     xBtn.TextTransparency = 1
@@ -394,8 +394,8 @@ local function showBuyModal(productInfo, recipient)
     xBtn.AnchorPoint = Vector2.new(1,0)
     xBtn.Size = UDim2.fromOffset(35,35)
     xBtn.BackgroundTransparency = 1
-    xBtn.Text = "X"
-    xBtn.Font = Enum.Font.Gotham
+    xBtn.Text = "x"
+    xBtn.Font = Enum.Font.GothamMedium
     xBtn.TextSize = 24
     xBtn.TextColor3 = Config.TextSub
     xBtn.ZIndex = 25
