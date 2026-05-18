@@ -57,7 +57,7 @@ local Fruits = {
     {name="Barrier", id=44669659, price=800,  icon=BLOX_LOGO, outline=Color3.fromRGB(180,180,220) },
     {name="Magma",   id=44669663, price=850,  icon=BLOX_LOGO, outline=Color3.fromRGB(200,60,20)   },
     {name="Quake",   id=44669668, price=1000, icon=BLOX_LOGO, outline=Color3.fromRGB(160,140,100) },
-    {name="Human: Buddha",  id=44669672, price=1650,
+    {name="Buddha",  id=44669672, price=1650,
         icon    = "rbxthumb://type=Asset&id=101573129815434&w=150&h=150",
         outline = Color3.fromRGB(220,180,20)
     },
