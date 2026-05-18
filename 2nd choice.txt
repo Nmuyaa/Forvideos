@@ -377,12 +377,39 @@ local function showBuyModal(productInfo, recipient)
     gui.Parent         = playerGui
 
     local modal = Instance.new("Frame")
-    modal.Size             = UDim2.fromOffset(420, 226)
-    modal.Position         = UDim2.fromScale(0.5, 0.5)
-    modal.AnchorPoint      = Vector2.new(0.5,0.5)
-    modal.BackgroundColor3 = Config.BgMid
-    modal.BorderSizePixel  = 0
-    modal.Parent           = gui
+    -- Background fade overlay
+local fadeBg = Instance.new("Frame")
+fadeBg.Size = UDim2.fromScale(1,1)
+fadeBg.BackgroundColor3 = Color3.new(0,0,0)
+fadeBg.BackgroundTransparency = 1
+fadeBg.BorderSizePixel = 0
+fadeBg.ZIndex = 998
+fadeBg.Parent = gui
+
+modal.Size             = UDim2.fromOffset(360, 190) -- starts smaller
+modal.Position         = UDim2.fromScale(0.5, 0.5)
+modal.AnchorPoint      = Vector2.new(0.5,0.5)
+modal.BackgroundColor3 = Config.BgMid
+modal.BorderSizePixel  = 0
+modal.BackgroundTransparency = 1
+modal.Parent           = gui
+modal.ZIndex           = 999
+
+-- Smooth intro animation
+TweenService:Create(fadeBg,
+    TweenInfo.new(0.25, Enum.EasingStyle.Quad),
+    {BackgroundTransparency = 0.35}
+):Play()
+
+task.delay(0.05, function()
+    TweenService:Create(modal,
+        TweenInfo.new(0.28, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+        {
+            Size = UDim2.fromOffset(420, 226),
+            BackgroundTransparency = 0
+        }
+    ):Play()
+end)
     corner(modal, 14)
     stroke(modal, Color3.fromRGB(90,90,100), 1.5, 0.3)
 
